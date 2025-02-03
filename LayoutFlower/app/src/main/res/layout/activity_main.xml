@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/messageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/message"
+        android:textSize="18sp" />
+
+    <ImageView
+        android:id="@+id/flowerImage"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginVertical="40dp"
+        android:contentDescription="@string/image_flower"
+        android:src="@drawable/f0" />
+
+    <Button
+        android:id="@+id/waterBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_water" />
+
+    <Button
+        android:id="@+id/resetBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:layout_marginTop="20dp"
+        android:text="@string/btn_reset"
+        android:visibility="invisible"/>
+
+
+</LinearLayout>

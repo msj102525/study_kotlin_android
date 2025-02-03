@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">LayoutFlower</string>
+    <string name="message">식물에 물을 줘봐요</string>
+    <string name="message0">아직 새싹이 나기전 이네요.</string>
+    <string name="message1">드디어 어린 새싹이 났어요.</string>
+    <string name="message2">가지도 나오기 시작 하고 봄이 오려나 봐요.</string>
+    <string name="message3">조금만 더 힘을 냅시다.</string>
+    <string name="message4">마지막 고비 입니다.</string>
+    <string name="message5">축하합니다. 꽃을 피웟습니다.</string>
+    <string name="image_flower">아직 새싹이 나오기전 입니다</string>
+    <string name="btn_water">물을 줘요</string>
+    <string name="btn_reset">리셋 할게요</string>
+</resources>
