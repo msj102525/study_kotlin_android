@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Quiz</string>
+    <string name="count_label">문제 %d</string>
+    <string name="answer_hint">정답을 입력해 주세요</string>
+</resources>
