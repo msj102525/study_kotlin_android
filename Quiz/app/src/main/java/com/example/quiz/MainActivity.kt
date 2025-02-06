@@ -1,19 +1,21 @@
 package com.example.quiz
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.KeyEvent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.quiz.databinding.ActivityMainBinding
 
-const val QUIZ_COUNT = 7
+const val QUIZ_COUNT = 5
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private var rightAnser: String? = null
-    private var rightAnserCount = 0
+    private var rightAnswer: String? = null
+    private var rightAnswerCount = 0
     private var quizCount = 1
 
     private val quizData = mutableListOf(
@@ -34,8 +36,16 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        quizData.shuffle()
+        binding.answerText.setOnKeyListener { _, keyCode, keyEvent ->
+            if (keyEvent.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+                checkAnswer()
+                true
+            } else {
+                false
+            }
+        }
 
+        quizData.shuffle()
         showNextQuiz()
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -50,19 +60,19 @@ class MainActivity : AppCompatActivity() {
         binding.countLabel.text = getString(R.string.count_label, quizCount)
         val quiz = quizData[0]
         binding.quizLabel.text = quiz[0]
-        rightAnser = quiz[1]
+        rightAnswer = quiz[1]
 
         quizData.removeAt(0)
     }
 
     // 채점하는 메소드
     private fun checkAnswer() {
-        val answerText = binding.answerText.toString()
+        val answerText = binding.answerText.text.toString()
 
         val alertTitle: String
-        if(answerText == rightAnser) {
+        if (answerText == rightAnswer) {
             alertTitle = "정답!"
-            rightAnserCount++
+            rightAnswerCount++
         } else {
             alertTitle = "오답..."
         }
@@ -70,7 +80,7 @@ class MainActivity : AppCompatActivity() {
         val answerDialogFragment = AnswerDialogFragment()
         val bundle = Bundle().apply {
             putString("TITLE", alertTitle)
-            putString("MESSAGE", "정답은 ${rightAnser}")
+            putString("MESSAGE", "정답은 ${rightAnswer}")
         }
         answerDialogFragment.arguments = bundle
         answerDialogFragment.isCancelable = false
@@ -80,6 +90,9 @@ class MainActivity : AppCompatActivity() {
     // 문제수를 확인하는 메소드
     fun checkQuizCount() {
         if (quizCount == QUIZ_COUNT) {
+            val intent = Intent(this@MainActivity, ResultActivity::class.java)
+            intent.putExtra("RIGHT_ANSWER_COUNT", rightAnswerCount)
+            startActivity(intent)
         } else {
             binding.answerText.text.clear()
             quizCount++
