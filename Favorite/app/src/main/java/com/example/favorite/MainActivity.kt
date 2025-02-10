@@ -1,7 +1,9 @@
 package com.example.favorite
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.widget.SimpleAdapter
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -19,18 +21,26 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val data = listOf(
-            "일본 여성", "먹방", "외로운 남자", "상어모자",
-            "소리지름", "행가레", "오덕후", "근육남", "말 두명",
-            "먕1", "먕2", "먕3"
-        )
-
         binding.listView.adapter =
-            ArrayAdapter(this, android.R.layout.simple_list_item_1, data)
+            SimpleAdapter(
+                this,
+                listData,
+                R.layout.list_item,
+                arrayOf("image", "name"),
+                intArrayOf(R.id.image, R.id.name)
+            )
 
-        binding.listView.setOnItemClickListener { parent, view, position, id ->
-            Toast.makeText(this@MainActivity, "${data[position]}을 선택하셨습니다", Toast.LENGTH_SHORT)
-                .show()
+        binding.listView.setOnItemClickListener {
+//            parent, view, position, id ->
+//            Toast.makeText(this@MainActivity, "${listData[position]["name"]}을 선택하셨습니다", Toast.LENGTH_SHORT)
+//                .show()
+                _, _, position, _ ->
+            startActivity(
+                Intent(this@MainActivity, DetailActivity::class.java)
+                    .apply {
+                        putExtra("POSITION", position)
+                    }
+            )
         }
 
     }
