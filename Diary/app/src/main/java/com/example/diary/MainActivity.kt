@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
 
             cursor.use {
                 while (it.moveToNext()) {
-                    sampleData.add(mapOf("data" to it.getString(0), "text" to it.getString(1)))
+                    sampleData.add(mapOf("date" to it.getString(0), "text" to it.getString(1)))
                 }
             }
 
