@@ -4,14 +4,20 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CardColors
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.basiccompose.ui.theme.BasicComposeTheme
 
 class MainActivity : ComponentActivity() {
@@ -20,11 +26,10 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             BasicComposeTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+//                Scaffold(modifier = Modifier.fillMaxSize()) {
+                Surface {
+                    var result: String = practice()
+                    ResultScreen(result)
                 }
             }
         }
@@ -32,17 +37,22 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+fun ResultScreen(result: String) {
+    Column {
+        Text("${result}",
+            modifier = Modifier.padding(20.dp),
+            fontWeight = FontWeight.Bold,
+            fontSize = 24.sp,
+            color = Color.Blue
+        )
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun ResultScreenPreview() {
     BasicComposeTheme {
-        Greeting("Android")
+        ResultScreen("Android")
     }
 }
+
